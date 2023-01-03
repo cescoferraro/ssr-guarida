@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="6.842" height="11.274" viewBox="0 0 6.842 11.274">
+    <g id="chevron-down" transform="translate(0 11.274) rotate(-90)">
+        <path id="chevron-down-2"
+              d="M10.855,130.155l-5.018-5.018a.62.62,0,0,1,0-.876l.585-.585a.62.62,0,0,1,.875,0l4,3.977,4-3.977a.62.62,0,0,1,.875,0l.585.585a.62.62,0,0,1,0,.876l-5.018,5.018A.62.62,0,0,1,10.855,130.155Z"
+              transform="translate(-5.656 -123.494)" fill="#666"/>
+    </g>
+</svg>
