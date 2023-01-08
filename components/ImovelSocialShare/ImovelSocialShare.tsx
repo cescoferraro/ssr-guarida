@@ -1,5 +1,5 @@
 import { Share } from "@mui/icons-material";
-import { Box, IconButton, Modal, Paper } from "@mui/material";
+import { Box, IconButton, Modal, Paper, Skeleton } from "@mui/material";
 import { center } from "common/center";
 import { EmailForm } from "components/ImovelSocialShare/EmailForm";
 import { SocialList } from "components/ImovelSocialShare/SocialList";
@@ -17,15 +17,19 @@ export function ImovelSocialShare({ imovel }: { imovel?: Imovel }) {
         e.stopPropagation();
       }}
     >
-      <IconButton
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setOpen((o) => !o);
-        }}
-      >
-        <Share />
-      </IconButton>
+      {!imovel && <Skeleton variant="circular" width={32} height={32} />}
+      {imovel && (
+        <IconButton
+          sx={{}}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setOpen((o) => !o);
+          }}
+        >
+          <Share />
+        </IconButton>
+      )}
       <Modal
         open={open}
         sx={{ ...center }}

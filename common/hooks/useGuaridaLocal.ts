@@ -1,20 +1,18 @@
-import {useQuery} from "@tanstack/react-query";
-import {GuaridaHttpClient} from "common/GuaridaHttpClient";
-import {useRouter} from "next/router";
-import {Localizacoes} from "typings";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { GuaridaHttpClient } from "common/GuaridaHttpClient";
+import { useParams } from "react-router-dom";
+import { LocalizacoesBySlug } from "typings";
 
-export const guaridaLocalCall = (slug?: string) => GuaridaHttpClient.get(`/localizacoes/${slug}`).then((d) => d.data);
+export const currentLocalQuery = (slug?: string) =>
+  GuaridaHttpClient.get(`/localizacoes/${slug}`).then((d) => d.data);
 
 export function useGuaridaLocal(
-    local?: string,
-    localizacoes?: Localizacoes,
-) {
-    const urlLocal = useRouter().query.localizacao;
-    const slug = (local || urlLocal) as string | undefined;
-    return useQuery<unknown, Error, Localizacoes>({
-        queryKey: ["cidade-refresh", slug],
-        queryFn: () =>
-            guaridaLocalCall(slug),
-        initialData: () => localizacoes
-    });
+  initial?: string
+): UseQueryResult<LocalizacoesBySlug> {
+  const local = useParams().local;
+  const slug = initial || local;
+  return useQuery<unknown, Error, LocalizacoesBySlug>({
+    queryKey: ["cidade-refresh", slug],
+    queryFn: () => currentLocalQuery(slug),
+  });
 }

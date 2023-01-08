@@ -5,3 +5,8 @@ export const center: React.CSSProperties = {
   justifyContent: "center",
   alignItems: "center",
 };
+
+export const denter: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+};

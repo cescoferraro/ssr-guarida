@@ -4,7 +4,13 @@ import { FooterGridItem } from "components/GuaridaFooter/FooterGridItem";
 import { FooterLinkComponent } from "components/GuaridaFooter/FooterLinkComponent";
 import * as React from "react";
 
-export function FooterContact({ color }: { color?: string }) {
+export function FooterContact({
+  showAll,
+  color,
+}: {
+  showAll?: boolean;
+  color?: string;
+}) {
   const sx = {
     fontWeight: "bold",
     color: color || "#666666",
@@ -50,15 +56,28 @@ export function FooterContact({ color }: { color?: string }) {
         >
           Atendimento via WhatsApp
         </Button>
-        <FooterLinkComponent
-          textColor={color}
-          always
-          spacer
-          footerLink={{
-            display: "Central de Ajuda",
-            anchor: "https://www.guarida.com.br/institucional/fale-conosco",
-          }}
-        />
+        {showAll && (
+          <FooterLinkComponent
+            textColor={color}
+            always
+            spacer
+            footerLink={{
+              display: "Central de Ajuda",
+              anchor: "https://www.guarida.com.br/institucional/fale-conosco",
+            }}
+          />
+        )}
+        {showAll && (
+          <FooterLinkComponent
+            textColor={color}
+            always
+            spacer
+            footerLink={{
+              display: "Fale Conosco",
+              anchor: "https://www.guarida.com.br/institucional/fale-conosco",
+            }}
+          />
+        )}
         <FooterLinkComponent
           textColor={color}
           always

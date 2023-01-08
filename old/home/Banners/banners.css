@@ -1,0 +1,18 @@
+.bannerContainer {
+    justify-content: space-between;
+    gap: 20px;
+}
+.bigBannerContainer{
+    justify-content: center;
+    gap: 20px;
+}
+
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.react-horizontal-scrolling-menu--scroll-container {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+

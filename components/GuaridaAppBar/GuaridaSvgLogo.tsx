@@ -3,9 +3,8 @@ import React, { SVGProps } from "react";
 export const GuaridaSvgLogo = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={126}
-    height={28}
     viewBox="0 0 128 28"
+    preserveAspectRatio="xMidYMid meet"
     {...props}
   >
     <path

@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography/Typography";
 
+export const appVersion = process.env.VERSION || "0.0.0";
+
 export const AppVersion = () => {
   return (
     <Box
@@ -13,8 +15,7 @@ export const AppVersion = () => {
       }}
     >
       <Typography align="right">
-        v{process.env.REACT_APP_VERSION || "0.0.0"} -{" "}
-        {process.env.REACT_APP_DATE_BUILD || ""}
+        v{appVersion} - {process.env.DATE_BUILD || ""}
       </Typography>
     </Box>
   );

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
+import { CarouselImage } from "components/GuaridaImovelCard/CarouselImage";
 import React, { useState } from "react";
 import Carousel from "react-material-ui-carousel";
-import { CarouselImage } from "components/GuaridaImovelCard/CarouselImage";
 import { Foto } from "typings";
 
 export interface IProps {
@@ -22,13 +22,9 @@ export const ImovelCarousel = ({ images }: IProps) => {
         duration={0}
         cycleNavigation={false}
         navButtonsAlwaysInvisible={false}
+        navButtonsAlwaysVisible={visible}
         indicators={visible}
-        indicatorIconButtonProps={{
-          style: {
-            color: "white", // 2
-            padding: "4px",
-          },
-        }}
+        indicatorIconButtonProps={{ style: { color: "white", padding: "4px" } }}
         activeIndicatorIconButtonProps={{ style: { color: "black" } }}
         indicatorContainerProps={{
           style: { marginTop: "-34px", position: "absolute", zIndex: 2 },

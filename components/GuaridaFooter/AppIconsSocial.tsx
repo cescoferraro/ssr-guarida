@@ -10,12 +10,12 @@ export const AppIconsSocial = () => {
   return (
     <>
       {[
-        { key: "twitter", value: twitter.src, href: "" },
-        { key: "linkedin", value: linkedin.src, href: "" },
-        { key: "youtube", value: youtube.src, href: "" },
-        { key: "instagram", value: instagram.src, href: "" },
-        { key: "blogger", value: blogger.src, href: "" },
-        { key: "facebook", value: facebook.src, href: "" },
+        { key: "twitter", value: twitter, href: "" },
+        { key: "linkedin", value: linkedin, href: "" },
+        { key: "youtube", value: youtube, href: "" },
+        { key: "instagram", value: instagram, href: "" },
+        { key: "blogger", value: blogger, href: "" },
+        { key: "facebook", value: facebook, href: "" },
       ].map((item, index) => {
         return (
           <IconButton key={index} href={item.href}>

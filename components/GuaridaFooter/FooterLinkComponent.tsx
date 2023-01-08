@@ -1,6 +1,5 @@
 import { ChevronRight } from "@mui/icons-material";
 import {
-  Box,
   IconButton,
   Link,
   Menu,
@@ -8,8 +7,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { center } from "common/center";
-import { useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { MouseEventHandler, useState } from "react";
 
 interface IProps {
   footerLink: {
@@ -35,65 +34,79 @@ export function FooterLinkComponent({
 }: IProps) {
   const isSmall = useMediaQuery(useTheme().breakpoints.down("md"));
   const spaceSx = spacer ? { "& > button:nth-of-type(n + 2)": { ml: 2 } } : {};
-  const color = textColor || useTheme().palette.primary.dark;
-  const [hover, setHover] = useState(false);
-  const ref = useRef<null | HTMLElement>(null);
+  const navigate = useRouter().push;
+  const color = textColor;
   const hasLinks = (links || []).length > 0;
-  const onClick = () => {
-    if (hasLinks) {
-      setHover((h) => !h);
-      return;
-    }
-    if (anchor) window.location.href = anchor;
-  };
+  const [anchorEl, setAnchorEl] = useState<
+    null | Element | ((element: Element) => Element)
+  >(null);
+  const onClick =
+    (isOnClick = false): MouseEventHandler<HTMLButtonElement> | undefined =>
+    (event) => {
+      if (hasLinks) {
+        if (anchorEl !== event.currentTarget)
+          if (event) {
+            setAnchorEl(event?.currentTarget);
+          }
+        return;
+      }
+      if (isOnClick && anchor) {
+        navigate(anchor);
+      }
+    };
   return (
-    <Box
-      sx={{ p: 1, ...spaceSx }}
-      width="100%"
-      justifyContent="space-between"
-      display="flex"
-      onMouseLeave={() => setHover(false)}
-      ref={ref}
+    <Link
+      sx={{
+        ...spaceSx,
+        display: "flex",
+        justifyContent: "space-between",
+        cursor: "pointer",
+        // padding: 8,
+        // textDecoration: "none",
+        // p: 0,
+        // color,
+        // pt: 0,
+        pb: 0,
+        pt: 2,
+        // width: "100%",
+        borderBottom: anchorEl ? "2px solid black" : "unset",
+      }}
+      href={anchor}
+      noWrap={noWrap}
+      fontSize={16}
+      color={"text.primary"}
+      lineHeight={"19px"}
+      fontWeight="bold"
+      py={1}
+      underline={"none"}
     >
-      <Box sx={{ ...center }}>
-        <Link
-          noWrap={noWrap}
-          href={anchor}
-          fontSize={16}
-          lineHeight={"19px"}
-          fontWeight="bold"
-          py={1}
-          underline={"none"}
-          sx={{ p: 0, color }}
-          onClick={onClick}
-        >
-          {display}
-        </Link>
-      </Box>
+      {display}
       {(always || isSmall || hasLinks) && (
-        <IconButton onClick={onClick} sx={{ p: 0 }}>
-          <ChevronRight sx={{ color }} />
-        </IconButton>
-      )}
-      <Menu
-        open={hover}
-        anchorEl={ref.current}
-        onClose={() => {
-          setHover(false);
-        }}
-      >
-        {(links || []).map((l) => (
-          <MenuItem
-            key={l.display}
-            onClick={() => {
-              setHover(false);
-              window.location.href = l.anchor;
-            }}
+        <>
+          <IconButton
+            aria-owns={anchorEl ? "simple-menu" : undefined}
+            aria-haspopup="true"
+            onClick={onClick(true)}
+            onMouseOver={onClick(false)}
+            sx={{ p: 0 }}
           >
-            {l.display}
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
+            <ChevronRight sx={{ color }} />
+          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={() => setAnchorEl(null)}
+            MenuListProps={{ onMouseLeave: () => setAnchorEl(null) }}
+          >
+            {(links || []).map((l) => (
+              <MenuItem key={l.display} onClick={() => setAnchorEl(null)}>
+                {l.display}
+              </MenuItem>
+            ))}
+          </Menu>
+        </>
+      )}
+    </Link>
   );
 }

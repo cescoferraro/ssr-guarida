@@ -5,7 +5,7 @@ import { DescriptionWrapper } from "./DescriptionWrapper";
 export function FooterSecondGridItem() {
   return (
     <FooterGridItem title={"Trabalhe com a gente"}>
-      <DescriptionWrapper>
+      <DescriptionWrapper description={"Venha fazer parte da nossa história."}>
         {[
           {
             display: "Guarida Carreiras",

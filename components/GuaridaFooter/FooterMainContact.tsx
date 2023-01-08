@@ -14,7 +14,7 @@ export function FooterMainContact() {
   const md = useMediaQuery(theme.breakpoints.only("sm"));
   const big = useMediaQuery(theme.breakpoints.down("md"));
   return big ? (
-    <Box sx={{ background: "#10334B" }}>
+    <Box sx={{ background: "#000000" }}>
       <Container>
         <Box
           sx={{
@@ -38,6 +38,16 @@ export function FooterMainContact() {
                 spacer
                 footerLink={{
                   display: "Central de Ajuda",
+                  anchor:
+                    "https://www.guarida.com.br/institucional/fale-conosco",
+                }}
+              />
+              <FooterLinkComponent
+                textColor={"white"}
+                always
+                spacer
+                footerLink={{
+                  display: "Fale Conosco",
                   anchor:
                     "https://www.guarida.com.br/institucional/fale-conosco",
                 }}

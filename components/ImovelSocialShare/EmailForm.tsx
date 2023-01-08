@@ -25,7 +25,8 @@ export function EmailForm({ setMode }: IProps) {
       policy: Yup.boolean().oneOf([true], "Field must be checked").required(),
       adds: Yup.boolean().required(),
     }),
-    onSubmit: values => {
+    onSubmit: (values) => {
+      // eslint-disable-next-line no-console
       console.log(values);
     },
   });

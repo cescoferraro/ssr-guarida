@@ -21,14 +21,13 @@ import {
   ListItemIcon,
   ListItemText,
   SwipeableDrawer,
-  Toolbar,
+  SxProps,
 } from "@mui/material";
 import { StoreComponent } from "components/GuaridaFooter/StoreComponent";
 import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 
-const currentAppUrl: string = process.env.REACT_APP_URL || "";
+const currentAppUrl: string = process.env.URL || "";
 
 const itens = [
   {
@@ -129,21 +128,25 @@ interface IProps {
   open: boolean;
 }
 
+const mt: SxProps = { sx: 56 / 8, sm: 64 / 8, md: 100 / 8 };
+
 export const GuaridaSidebar: React.FC<IProps> = ({ open, setOpen }) => {
   const onClose = useCallback(() => setOpen((s) => !s), [setOpen]);
   const navigate = useRouter().push;
   return (
     <SwipeableDrawer
-      PaperProps={{ sx: { width: "100%", backgroundColor: "transparent" } }}
+      sx={{ "&": { mt } }}
+      PaperProps={{
+        sx: { backgroundColor: "transparent", mt, height: "100%" },
+      }}
+      BackdropProps={{ sx: { mt } }}
       transitionDuration={500}
       anchor={"left"}
       open={open}
       onClose={onClose}
       onOpen={onClose}
-      hideBackdrop
     >
-      <Toolbar sx={{ background: "transparent", mt: 0.1 }} />
-      <Box sx={{ background: "white" }}>
+      <Box sx={{ background: "white", height: "100%" }}>
         <List sx={{ height: "100%", p: 0 }}>
           {itens.map((i) => (
             <ListItem
@@ -151,11 +154,7 @@ export const GuaridaSidebar: React.FC<IProps> = ({ open, setOpen }) => {
               disablePadding
               style={{ borderBottom: "1px solid #E5E5E5" }}
             >
-              <ListItemButton
-                onClick={() => {
-                  // navigate(i.action);
-                }}
-              >
+              <ListItemButton onClick={() => navigate(i.action)}>
                 <ListItemIcon>{i.icon}</ListItemIcon>
                 <ListItemText primary={i.label} />
               </ListItemButton>

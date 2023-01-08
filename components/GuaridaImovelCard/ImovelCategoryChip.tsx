@@ -1,28 +1,26 @@
 import { Chip, experimental_sx, styled } from "@mui/material";
 import { Categoria } from "typings";
 
-const color = "#444444 !important";
 export const ImovelCategoryChip = styled(Chip)<{ categoria?: Categoria }>(
-  ({ label }) => {
-    return experimental_sx({
+  ({ categoria }) =>
+    experimental_sx({
       position: "absolute !important",
       top: "10px",
       background: "#F1F1F1",
       padding: 0,
       borderRadius: "4px",
       left: "10px !important",
-      color,
+      color: "#444444 !important",
       textTransform: "uppercase",
       lineHeight: "19px",
-      zIndex: "100",
+      zIndex: 9,
       height: 19,
       opacity: 0.7,
       "& > span": {
-        color: label ? color : "transparent",
+        color: categoria?.nome ? "unset" : "transparent",
         fontSize: 10,
         px: 0.5,
         py: 0,
       },
-    });
-  }
+    })
 );

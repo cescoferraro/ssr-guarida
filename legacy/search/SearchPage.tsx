@@ -8,11 +8,11 @@ import { useSearchPage } from "legacy/search/useSearchPage";
 import React, { useRef } from "react";
 import { Categoria, Localizacoes, SearchResponse } from "typings";
 
-type IProps = {
+interface IProps {
   initialLocal?: Localizacoes;
   categorias?: Categoria[];
   initialResult?: SearchResponse;
-};
+}
 
 export const SearchPage = ({
   initialResult,

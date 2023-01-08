@@ -1,9 +1,10 @@
-import '../styles/globals.css'
-import {ThemeProvider} from "@mui/system";
-import {QueryClient} from "@tanstack/query-core";
-import {QueryClientProvider} from "@tanstack/react-query";
-import {theme}from "theme";
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import "react-18-image-lightbox/style.css";
+import { ThemeProvider } from "@mui/system";
+import { QueryClient } from "@tanstack/query-core";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { theme } from "theme";
+import type { AppProps } from "next/app";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,10 +21,10 @@ const queryClient = new QueryClient({
 });
 export default function App({ Component, pageProps }: AppProps) {
   return (
-      <ThemeProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
-         <Component {...pageProps} />
-        </QueryClientProvider>
-      </ThemeProvider>
-  )
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </ThemeProvider>
+  );
 }

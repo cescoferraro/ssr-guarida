@@ -10,7 +10,7 @@ import React, { useState } from "react";
 export const GuaridaAppBar: React.FC<{
   position?: "fixed" | "absolute" | "sticky" | "static" | "relative";
   children?: React.ReactNode;
-}> = ({ children, position = "fixed" }) => {
+}> = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [boleto, setBoleto] = useState(false);
   return (
@@ -18,8 +18,7 @@ export const GuaridaAppBar: React.FC<{
       <AppBar
         color={"default"}
         component="header"
-        position={position}
-        sx={{ boxShador: "none" }}
+        sx={{ boxShadow: "none", zIndex: 10, paddingRight: "0 !important" }}
       >
         <GuaridaToolbar>
           <GuaridaAppBarLogo onClick={() => setOpen(!open)} />

@@ -27,8 +27,7 @@ export const FooterMainLinks: React.FC = () => (
         {
           display: " Política de Privacidade",
           anchor:
-            (process.env.REACT_APP_URL || "") +
-            "/institucional/politica-de-privacidade",
+            (process.env.URL || "") + "/institucional/politica-de-privacidade",
         },
         {
           display: " Termos e Condições de Uso",
@@ -38,8 +37,7 @@ export const FooterMainLinks: React.FC = () => (
         {
           display: " Políticas de Cookies",
           anchor:
-            (process.env.REACT_APP_URL || "") +
-            "/institucional/politica-de-cookies",
+            (process.env.URL || "") + "/institucional/politica-de-cookies",
         },
       ].map((footerLink) => (
         <FooterLinkComponent

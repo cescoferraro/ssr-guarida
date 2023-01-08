@@ -12,8 +12,12 @@ export interface IProps {
 
 export function DesktopAppbarButton(props: { i: IProps }) {
   const theme = useTheme();
+  // const location = useLocation();
   const palette = theme.palette;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const pathname = "/sdfsd";
+  const link = props.i?.link || "";
+  const isActive = props.i.link ? pathname.includes(link) : false;
   return (
     <>
       <Button
@@ -24,14 +28,15 @@ export function DesktopAppbarButton(props: { i: IProps }) {
         }}
         sx={{
           fontSize: 16,
+          fontWeight: isActive ? 700 : 400,
           textTransform: "none",
           "&.MuiButtonBase-root:hover": {
             backgroundColor: "transparent",
           },
-          color: palette.grey.A700,
+          color: theme.palette.text.primary,
           "&:hover": {
             opacity: 1,
-            color: theme.palette.primary.dark,
+            color: theme.palette.text.primary,
           },
         }}
         endIcon={

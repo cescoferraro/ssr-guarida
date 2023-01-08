@@ -77,7 +77,9 @@ export function FooterThirdGridItem() {
   ];
   return (
     <FooterGridItem title="Áreas de negócio">
-      <DescriptionWrapper>
+      <DescriptionWrapper
+        description={`Confiança e segurança para proprietários e inquilinos.`}
+      >
         {links.map((footerLink) => (
           <FooterLinkComponent
             key={footerLink.display}

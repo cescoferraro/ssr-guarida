@@ -6,7 +6,9 @@ import { FooterLinkComponent } from "components/GuaridaFooter/FooterLinkComponen
 export function FooterFirstGridItem() {
   return (
     <FooterGridItem title={"Sobre nós"}>
-      <DescriptionWrapper>
+      <DescriptionWrapper
+        description={`Conheça a Guarida, experiência no ramo imobiliário que reflete aquilo que nos move, nosso propósito.Tudo que a gente faz é pra você viver melhor!`}
+      >
         {[
           {
             display: "Grupo Guarida",
@@ -14,13 +16,15 @@ export function FooterFirstGridItem() {
           },
           {
             display: "Agências",
+
             anchor: currentAppUrl + "/institucional/agencias",
           },
           { display: "Campanhas", anchor: "#" },
           { display: "Blog", anchor: "https://blog.guarida.com.br/" },
           {
-            display: "Central de Ajuda",
-            anchor: "https://g.guarida.com.br/faq",
+            display: "Amor que movimenta",
+            anchor:
+              "https://www.guarida.com.br/institucional/amor-que-movimenta",
           },
           {
             display: "Avalie Nossos Serviços",

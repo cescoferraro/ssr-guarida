@@ -5,6 +5,7 @@ export const ImovelCardContainer = styled(Card)(
     display: "flex",
     flexDirection: "column",
     minWidth: { xs: "90vw", sm: 390, md: 390 },
+    minHeight: 400,
     boxShadow: "none",
   })
 );

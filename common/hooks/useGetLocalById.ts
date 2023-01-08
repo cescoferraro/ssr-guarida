@@ -12,10 +12,13 @@ export function useGetLocalById() {
     mutationFn: ({ id, type }) => {
       let string = "logradouro";
       switch (type) {
-        case "Bairros":
+        case "estado":
+          string = "estado";
+          break;
+        case "bairro":
           string = "bairro";
           break;
-        case "Cidades":
+        case "cidade":
           string = "cidade";
           break;
         default:

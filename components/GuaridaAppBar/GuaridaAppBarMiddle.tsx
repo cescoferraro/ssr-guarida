@@ -44,7 +44,11 @@ const menuItems: Array<IProps> = [
 ];
 
 export function GuaridaAppBarMiddle() {
-  const isSmallerThanLarge = useMediaQuery(useTheme().breakpoints.down("lg"));
+  const isXs = useMediaQuery(useTheme().breakpoints.only("xs"));
+  const isMd = useMediaQuery(useTheme().breakpoints.only("md"));
+  const isSm = useMediaQuery(useTheme().breakpoints.only("sm"));
+  const isLarge = useMediaQuery(useTheme().breakpoints.up("md"));
+  const isMDorSm = isMd || isSm;
   return (
     <Box
       sx={{
@@ -54,15 +58,17 @@ export function GuaridaAppBarMiddle() {
         justifyContent: "flex-end",
       }}
     >
-      {menuItems
-        .filter((d) =>
-          isSmallerThanLarge
-            ? ["Comprar", "Alugar", "Mais"].includes(d.title)
-            : true
-        )
-        .map((i, index) => (
-          <DesktopAppbarButton key={index} i={i} />
-        ))}
+      {isXs
+        ? []
+        : menuItems
+            .filter((d) =>
+              isMDorSm
+                ? ["Comprar", "Alugar", "Mais"].includes(d.title)
+                : isLarge
+                ? !["Mais"].includes(d.title)
+                : true
+            )
+            .map((i, index) => <DesktopAppbarButton key={index} i={i} />)}
     </Box>
   );
 }

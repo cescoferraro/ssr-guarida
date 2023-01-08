@@ -8,7 +8,6 @@ import { Imovel } from "typings";
 
 export function SocialList({
   imovel,
-  setMode,
 }: {
   setMode: Dispatch<SetStateAction<SocialModalMode>>;
   imovel?: Imovel;
@@ -17,13 +16,13 @@ export function SocialList({
   return (
     <Box display="flex" flexDirection="column">
       <Typography sx={{ py: 1 }}>Compartilhar</Typography>
-      <Button
-        sx={{ justifyContent: "flex-start" }}
-        onClick={() => setMode((m) => (m === "list" ? "email" : "list"))}
-        startIcon={<Mail />}
-      >
-        Email
-      </Button>
+      {/*<Button*/}
+      {/*  sx={{ justifyContent: "flex-start" }}*/}
+      {/*  onClick={() => setMode((m) => (m === "list" ? "email" : "list"))}*/}
+      {/*  startIcon={<Mail />}*/}
+      {/*>*/}
+      {/*  Email*/}
+      {/*</Button>*/}
       <Button
         sx={{ justifyContent: "flex-start" }}
         startIcon={<Mail />}
@@ -33,16 +32,16 @@ export function SocialList({
       >
         Whatsapp
       </Button>
-      <Button
-        sx={{ justifyContent: "flex-start" }}
-        startIcon={<Mail />}
-        onClick={() => {
-          // const text = imovel?.endereco || "";
-          // window.location.href = `https://www.facebook.com/sharer/sharer.php?u=${urlToShare}&quote=${text}`;
-        }}
-      >
-        Facebook
-      </Button>
+      {/*<Button*/}
+      {/*  sx={{ justifyContent: "flex-start" }}*/}
+      {/*  startIcon={<Mail />}*/}
+      {/*  onClick={() => {*/}
+      {/*    // const text = imovel?.endereco || "";*/}
+      {/*    // window.location.href = `https://www.facebook.com/sharer/sharer.php?u=${urlToShare}&quote=${text}`;*/}
+      {/*  }}*/}
+      {/*>*/}
+      {/*  Facebook*/}
+      {/*</Button>*/}
       <Button
         sx={{ justifyContent: "flex-start" }}
         startIcon={<Mail />}

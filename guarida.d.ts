@@ -196,6 +196,7 @@ export interface paths {
           Bairro?: boolean;
           Cidade?: boolean;
           Logradouro?: boolean;
+          Estado?: boolean;
         };
       };
       responses: {
@@ -221,9 +222,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RetornaLocalizacoes"];
-            "application/json": components["schemas"]["RetornaLocalizacoes"];
-            "text/json": components["schemas"]["RetornaLocalizacoes"];
+            "text/plain": components["schemas"]["RetornaLocalizacaoViewModel"];
+            "application/json": components["schemas"]["RetornaLocalizacaoViewModel"];
+            "text/json": components["schemas"]["RetornaLocalizacaoViewModel"];
           };
         };
       };
@@ -286,7 +287,46 @@ export interface paths {
       };
     };
   };
+  "/localizacoes/estado/{id}": {
+    get: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["Estado"];
+            "application/json": components["schemas"]["Estado"];
+            "text/json": components["schemas"]["Estado"];
+          };
+        };
+      };
+    };
+  };
   "/localizacoes/bairros": {
+    get: {
+      parameters?: {
+        query?: {
+          Id?: number;
+          Slug?: string | null;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            "text/plain": components["schemas"]["Bairro"][];
+            "application/json": components["schemas"]["Bairro"][];
+            "text/json": components["schemas"]["Bairro"][];
+          };
+        };
+      };
+    };
+  };
+  "/localizacoes/logradouros": {
     get: {
       parameters?: {
         query?: {
@@ -321,12 +361,28 @@ export interface paths {
       };
     };
   };
+  "/visitas": {
+    post: {
+      requestBody?: {
+        content: {
+          "application/json": components["schemas"]["DadosVisitasViewModel"];
+          "text/json": components["schemas"]["DadosVisitasViewModel"];
+          "application/*+json": components["schemas"]["DadosVisitasViewModel"];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: never;
+      };
+    };
+  };
   "/api/System/PopulateImoview": {
     get: {
       parameters?: {
         query?: {
           page?: number;
           ignoraData?: boolean;
+          populaLocalizacoes?: boolean;
         };
       };
       responses: {
@@ -341,6 +397,20 @@ export interface paths {
         query?: {
           page?: number;
           ignoraData?: boolean;
+          populaLocalizacoes?: boolean;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: never;
+      };
+    };
+  };
+  "/api/System/PopulateCorretor": {
+    get: {
+      parameters?: {
+        query?: {
+          page?: number;
         };
       };
       responses: {
@@ -368,9 +438,15 @@ export interface components {
       /** Format: int32 */
       page?: number;
       /** Format: int32 */
+      id_campanha?: number | null;
+      /** Format: int32 */
+      id_filtro?: number;
+      /** Format: int32 */
       cidade?: number;
       /** Format: int32 */
       bairro?: number;
+      /** Format: int32 */
+      estado?: number;
       categoria_mobile?: string | null;
       valor?: components["schemas"]["FilterMinMax"];
       area?: components["schemas"]["FilterMinMax"];
@@ -421,6 +497,19 @@ export interface components {
       /** Format: int32 */
       id?: number;
     };
+    CorretorViewModel: {
+      /** Format: int32 */
+      codigo?: number;
+      nome?: string | null;
+      email?: string | null;
+      celular?: string | null;
+      foto?: string | null;
+    };
+    TagViewModel: {
+      nome?: string | null;
+      cor_de_texto?: string | null;
+      cor_de_fundo?: string | null;
+    };
     FilterDetailsModel: {
       /** Format: int32 */
       num_fotos?: number;
@@ -446,6 +535,8 @@ export interface components {
       flag?: string | null;
       telefone_primario?: string | null;
       telefone_secundario?: string | null;
+      /** Format: int32 */
+      id_campanha?: number | null;
       id?: string | null;
       /** Format: int32 */
       quartos?: number;
@@ -459,6 +550,8 @@ export interface components {
       cidade_id?: number;
       /** Format: int32 */
       bairro_id?: number;
+      /** Format: int32 */
+      estado_id?: number;
       uf?: string | null;
       numero?: string | null;
       /** Format: int32 */
@@ -480,7 +573,8 @@ export interface components {
       tag_carencia?: boolean;
       tag_exclusivo?: boolean;
       tag_valorTabela?: boolean;
-      mostra_campanha?: boolean;
+      /** Format: int32 */
+      campanha_id?: number;
       /** Format: int32 */
       suites?: number;
       churrasqueira?: boolean;
@@ -503,6 +597,8 @@ export interface components {
       seguro_fogo_num?: number;
       seguro_fogo_txt?: string | null;
       desconto_percentual?: string | null;
+      corretor?: components["schemas"]["CorretorViewModel"];
+      tag?: components["schemas"]["TagViewModel"][] | null;
     };
     PaginasModel: {
       current?: string | null;
@@ -569,12 +665,20 @@ export interface components {
     RetornaCategoriaSlug: {
       slug?: string | null;
     };
+    Estado: {
+      /** Format: int32 */
+      id?: number;
+      nome?: string | null;
+      slug?: string | null;
+      uf?: string | null;
+    };
     Cidade: {
       /** Format: int32 */
       id?: number;
       nome?: string | null;
       slug?: string | null;
       uf?: string | null;
+      estado?: components["schemas"]["Estado"];
     };
     Bairro: {
       /** Format: int32 */
@@ -596,6 +700,20 @@ export interface components {
       bairros?: components["schemas"]["Bairro"][] | null;
       cidades?: components["schemas"]["Cidade"][] | null;
       logradouros?: components["schemas"]["Logradouro"][] | null;
+      estados?: components["schemas"]["Estado"][] | null;
+    };
+    BreadcrumbItem: {
+      nome?: string | null;
+      slug?: string | null;
+      tipo?: string | null;
+    };
+    RetornaLocalizacaoViewModel: {
+      tipo?: string | null;
+      /** Format: int32 */
+      id?: number;
+      nome?: string | null;
+      slug?: string | null;
+      breadcrumb?: components["schemas"]["BreadcrumbItem"][] | null;
     };
     DadosFormularioViewModel: {
       nome?: string | null;
@@ -603,7 +721,26 @@ export interface components {
       telefone?: string | null;
       mensagem?: string | null;
       aceita_Termos?: boolean;
-      aceita_Notificacao?: boolean;
+      aceita_notificacao?: boolean;
+      campanha?: string | null;
+      source?: string | null;
+      /** Format: int32 */
+      codigo_imovel?: number;
+      /** Format: int32 */
+      negocio?: number;
+      /** Format: int32 */
+      corretor?: number;
+    };
+    DadosVisitasViewModel: {
+      /** Format: int32 */
+      codigo_Imovel?: number;
+      /** Format: int32 */
+      negocio?: number;
+      nome_Interessado?: string | null;
+      email_Interessado?: string | null;
+      telefone_Interessado?: string | null;
+      /** Format: date-time */
+      data_de_Visita?: string;
     };
   };
   responses: never;

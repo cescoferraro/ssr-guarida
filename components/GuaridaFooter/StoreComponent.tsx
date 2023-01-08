@@ -17,7 +17,7 @@ export function StoreComponent({ sx }: { sx?: SxProps }) {
             width: { lg: "100%", md: "100%", sm: "40%", xs: "90%" },
           }}
         >
-          <Typography>AGÊNCIA VIRTUAL</Typography>
+          <Typography align={"center"}>AGÊNCIA VIRTUAL</Typography>
           <Box sx={{ py: 2, ...center }}>
             <Button
               variant={"contained"}
@@ -38,14 +38,14 @@ export function StoreComponent({ sx }: { sx?: SxProps }) {
               <Box
                 sx={{ width: "-webkit-fill-available" }}
                 component="img"
-                src={appStoreSvg.src}
+                src={appStoreSvg}
               />
             </Box>
             <Box flexBasis="50%" maxWidth="50%">
               <Box
                 sx={{ width: "-webkit-fill-available" }}
                 component="img"
-                src={GooglePlayStore.src}
+                src={GooglePlayStore}
               />
             </Box>
           </Box>

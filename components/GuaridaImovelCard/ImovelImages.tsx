@@ -1,7 +1,7 @@
 import { Box, CardMedia, Skeleton } from "@mui/material";
-import { useGuaridaCategorias } from "common/hooks/useGuaridaCategorias";
 import { ImovelCarousel } from "components/GuaridaImovelCard/ImovelCarousel";
 import { ImovelCategoryChip } from "components/GuaridaImovelCard/ImovelCategoryChip";
+import { useGuaridaCategorias } from "common/hooks/useGuaridaCategorias";
 import React from "react";
 import { Imovel, SearchInput } from "typings";
 
@@ -11,12 +11,18 @@ interface IProps {
 }
 
 export const ImovelImages = ({ imovel, input }: IProps) => {
-  const { data } = useGuaridaCategorias(input, "putari");
-  const categoria = data?.find((d) => String(d.id) === String(imovel?.tipo));
+  const { data } = useGuaridaCategorias(input);
+  const categoria = data?.find(
+    (d) => String(d.id) === String(imovel?.categoria?.id)
+  );
   return (
     <CardMedia component={"div"} sx={{ cursor: "pointer" }}>
       <Box position="relative">
-        <ImovelCategoryChip color="info" label={categoria?.nome} />
+        <ImovelCategoryChip
+          categoria={categoria}
+          color="info"
+          label={categoria?.nome || "__________"}
+        />
       </Box>
       <Box sx={{ height: 250 }}>
         {!imovel ? (

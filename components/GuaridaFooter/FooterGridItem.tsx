@@ -14,8 +14,8 @@ export function FooterGridItem({ md = 3, children, title }: IProps) {
         <Typography
           noWrap
           sx={{
-            fontWeight: "bold",
             color: "#666666",
+            fontWeight: "bold",
             fontSize: "18px !important",
             textAlign: "left",
             pb: 1,

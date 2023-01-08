@@ -1,10 +1,10 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import { Box, IconButton } from "@mui/material";
+import { Link, Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { GuaridaSvgLogo } from "components/GuaridaAppBar/GuaridaSvgLogo";
-import Link from "next/link";
 import React from "react";
 
 export function GuaridaAppBarLogo(props: { onClick: () => void }) {
+  const isSmallScreen = useMediaQuery(useTheme().breakpoints.down("md"));
   return (
     <Box
       sx={{
@@ -15,10 +15,7 @@ export function GuaridaAppBarLogo(props: { onClick: () => void }) {
       }}
     >
       <IconButton
-        sx={{
-          color: "black",
-          display: { xs: "block", sm: "block", md: "none" },
-        }}
+        sx={{ color: "black" }}
         size="large"
         edge="start"
         color="default"
@@ -27,11 +24,18 @@ export function GuaridaAppBarLogo(props: { onClick: () => void }) {
       >
         <MenuIcon />
       </IconButton>
-      <Link href="/">
-        <Box sx={{ width: 120, height: 30 }}>
-          <GuaridaSvgLogo />
-        </Box>
-      </Link>
+      {/*<Link to="/">*/}
+      {/*  <Box*/}
+      {/*    sx={{*/}
+      {/*      display: "flex",*/}
+      {/*      overflow: "hidden",*/}
+      {/*      height: "width",*/}
+      {/*      width: { xs: 120, sm: 120, md: "180px !important" },*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    {isSmallScreen ? <GuaridaSvgLogo /> : <GuaridaSvgLogo />}*/}
+      {/*  </Box>*/}
+      {/*</Link>*/}
     </Box>
   );
 }

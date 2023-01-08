@@ -1,4 +1,4 @@
-import { Home as LegacyHome } from "legacy/home/Home";
+import { Home as LegacyHome } from "old/home/Home";
 
 export default function Home() {
   return <LegacyHome />;

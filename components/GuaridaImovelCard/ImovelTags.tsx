@@ -6,26 +6,27 @@ import { Imovel } from "typings";
 export const ImovelTags = ({ imovel }: { imovel?: Imovel }) => {
   const hasDiscount = (imovel?.valor_anterior_num || 0) > 0;
   return (
-    <Box sx={{ height: 64, display: "flex", justifyContent: "center" }}>
+    <Box sx={{ height: 16, display: "flex", justifyContent: "center" }}>
       <Box
         sx={{
           display: "flex",
           width: "100%",
           justifyContent: "center",
-          flexDirection: "column",
+          flexDirection: "row",
         }}
       >
         {imovel ? (
           <>
             {[
               imovel?.tag_exclusivo
-                ? { label: "Guarida Exclusive", color: "primary" }
+                ? { label: "Guarida Exclusive", color: "secondary" }
                 : undefined,
               hasDiscount
                 ? { label: "Melhor Preço", color: "default" }
                 : undefined,
             ]
               .filter(notEmpty)
+              .filter((_, idx) => idx <= 1)
               .map((s, index) => {
                 return (
                   <Box
@@ -33,13 +34,14 @@ export const ImovelTags = ({ imovel }: { imovel?: Imovel }) => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      height: "100%",
                     }}
                     key={`${imovel.id}-${index}-${s.label}`}
                   >
                     <Chip
                       sx={{
                         height: 16,
-                        mt: index === 0 ? 0 : 1,
+                        ml: index === 0 ? 0 : 1,
                         borderRadius: 0,
                       }}
                       label={s.label}
@@ -51,21 +53,15 @@ export const ImovelTags = ({ imovel }: { imovel?: Imovel }) => {
               })}
           </>
         ) : (
-          <Box sx={{ px: 12 }}>
-            <Skeleton height={16} width="100%" variant="rectangular" />
+          <>
+            <Skeleton height={16} width="20%" variant="rectangular" />
             <Skeleton
-              sx={{ mt: 2 }}
+              sx={{ ml: 2 }}
               height={16}
-              width="100%"
+              width="20%"
               variant="rectangular"
             />
-            <Skeleton
-              sx={{ mt: 2 }}
-              height={16}
-              width="100%"
-              variant="rectangular"
-            />
-          </Box>
+          </>
         )}
       </Box>
     </Box>
