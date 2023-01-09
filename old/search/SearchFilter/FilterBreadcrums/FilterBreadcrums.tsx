@@ -11,22 +11,11 @@ import { SearchInput } from "typings";
 
 interface IProps {
   input: Partial<SearchInput>;
-  setLoading: () => void;
-  containerRef: React.MutableRefObject<HTMLButtonElement | undefined>;
 }
 
-function MobileNEgocioSelect({
-  input,
-  containerRef,
-  setLoading,
-}: {
-  input: Partial<SearchInput>;
-
-  setLoading: () => void;
-  containerRef: React.MutableRefObject<HTMLButtonElement | undefined>;
-}) {
+function MobileNEgocioSelect({ input }: { input: Partial<SearchInput> }) {
   const location = { pathname: "sdkf" };
-  const navigateNewSearch = useChangeSearchState(containerRef, setLoading);
+  const navigateNewSearch = useChangeSearchState();
   return (
     <Box sx={{ ...center, display: { xs: "flex", sm: "flex", md: "none" } }}>
       <RoundedSelect
@@ -71,11 +60,7 @@ function MobileNEgocioSelect({
   );
 }
 
-export const FilterBreadcrums: React.FC<IProps> = ({
-  setLoading,
-  containerRef,
-  input,
-}) => {
+export const FilterBreadcrums: React.FC<IProps> = ({ input }) => {
   return (
     <Box
       sx={{ display: "flex", justifyContent: "space-between", pt: 1, px: 2 }}
@@ -86,13 +71,8 @@ export const FilterBreadcrums: React.FC<IProps> = ({
             <HomeIcon />
           </IconButton>
         </Box>
-        <MobileNEgocioSelect
-          input={input}
-          setLoading={setLoading}
-          containerRef={containerRef}
-        />
+        <MobileNEgocioSelect input={input} />
         <BreadcrumbsGuarida
-          input={input}
           sx={{
             ...center,
             display: { xs: "none", sm: "none", md: "flex" },

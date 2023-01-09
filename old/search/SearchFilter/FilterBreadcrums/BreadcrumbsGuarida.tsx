@@ -1,38 +1,33 @@
 import { Box, Breadcrumbs, Divider, Link, SxProps } from "@mui/material";
 import { useGuaridaLocal } from "common/hooks/useGuaridaLocal";
+import { components } from "guarida";
 import { capitalize } from "lodash";
-import { useRouter } from "next/router";
 import { LocalBreadcrumb } from "old/search/SearchFilter/FilterBreadcrums/LocalBreadcrumb";
 import { useCampanhasQuery } from "old/search/useCampanhasQuery";
 import { useNextParams } from "old/search/useNextParams";
 import React from "react";
-import { SearchInput } from "typings";
 
 interface IProps {
   sx?: SxProps;
-  input: Partial<SearchInput>;
 }
 
-export function BreadcrumbsGuarida({ sx, input }: IProps) {
+type BreadCrumb = components["schemas"]["BreadcrumbItem"];
+
+export function BreadcrumbsGuarida({ sx }: IProps) {
   const p = useNextParams();
-  const navigate = useRouter().push;
   const q = useCampanhasQuery();
   const { data } = useGuaridaLocal();
   const isCampanha = p.campanha !== "busca";
+
+  const url = (b: BreadCrumb) =>
+    location.pathname.replace(p.local || "", b?.slug || "");
   return (
     <Box sx={{ ...sx }}>
       <Box display="flex">
         <Divider orientation="vertical" flexItem />
         <Breadcrumbs aria-label="breadcrumb" separator="›" sx={{ pl: 1 }}>
-          <Link
-            underline="hover"
-            color="inherit"
-            onClick={() => {
-              // , { state: input }
-              navigate(`/${p?.negocio}`);
-            }}
-          >
-            {capitalize(p.negocio)}
+          <Link underline="hover" color="inherit" href={`/${p?.negocio}`}>
+            {capitalize(p.negocio as string)}
           </Link>
           {(!isCampanha &&
             data?.breadcrumb
@@ -42,13 +37,7 @@ export function BreadcrumbsGuarida({ sx, input }: IProps) {
                   <LocalBreadcrumb
                     key={b?.slug}
                     name={b?.nome || ""}
-                    onClick={() => {
-                      const url = location.pathname.replace(
-                        p.local || "",
-                        b?.slug || ""
-                      );
-                      navigate(url, { state: input });
-                    }}
+                    href={url(b) || ""}
                   />
                 );
               })) ||

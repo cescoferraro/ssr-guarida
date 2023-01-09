@@ -15,7 +15,7 @@ export function useLeadMutation(
   send2Whats: boolean,
   imovel?: Imovel
 ) {
-  const negocio = useNextParams().negocio;
+  const negocio = useNextParams().negocio as string;
   return useMutation<WeirdApiResult, Error, Lead>({
     mutationKey: [],
     mutationFn: (variables) =>

@@ -1,21 +1,16 @@
 import { MenuItem } from "@mui/material";
-import { useChangeSearchState } from "old/search/SearchFilter/useChangeSearchState";
+import { useSearchInputContext } from "old/search/searchInputContext";
 import React from "react";
 import { SearchInput } from "typings";
 import { RoundedSelect } from "./RoundedSelect";
 
 interface IProps {
-  gridRef: React.MutableRefObject<HTMLButtonElement | undefined>;
   input: Partial<SearchInput>;
-  setLoading: () => void;
 }
 
-export const PropertyFilterFooterOrder: React.FC<IProps> = ({
-  gridRef,
-  input,
-  setLoading,
-}) => {
-  const search = useChangeSearchState(gridRef, setLoading);
+export const PropertyFilterFooterOrder: React.FC<IProps> = ({ input }) => {
+  // const search = useChangeSearchState(gridRef, setLoading);
+  const [, setInput] = useSearchInputContext();
   return (
     <RoundedSelect
       color="secondary"
@@ -23,9 +18,10 @@ export const PropertyFilterFooterOrder: React.FC<IProps> = ({
       size="small"
       id="demo-simple-select"
       value={input.order}
-      onChange={async (event) =>
-        await search({ ...input, order: event.target.value })
-      }
+      onChange={async (event) => {
+        setInput({ ...input, order: event.target.value, page: 0 });
+        // await search();
+      }}
     >
       {[
         {

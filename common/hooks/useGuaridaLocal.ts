@@ -1,6 +1,6 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { GuaridaHttpClient } from "common/GuaridaHttpClient";
-import { useParams } from "react-router-dom";
+import { useNextParams } from "old/search/useNextParams";
 import { LocalizacoesBySlug } from "typings";
 
 export const currentLocalQuery = (slug?: string) =>
@@ -9,7 +9,7 @@ export const currentLocalQuery = (slug?: string) =>
 export function useGuaridaLocal(
   initial?: string
 ): UseQueryResult<LocalizacoesBySlug> {
-  const local = useParams().local;
+  const local = useNextParams().localizacao;
   const slug = initial || local;
   return useQuery<unknown, Error, LocalizacoesBySlug>({
     queryKey: ["cidade-refresh", slug],

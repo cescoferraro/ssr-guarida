@@ -10,15 +10,13 @@ import {
   Theme,
 } from "@mui/material";
 import { ClearDrawerState } from "old/search/SearchFilter/FilterDrawer/ClearDrawerState";
-import { useCampanhasQuery } from "old/search/useCampanhasQuery";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useNextParams } from "old/search/useNextParams";
-import { SearchInput } from "typings";
 import { useChangeSearchState } from "old/search/SearchFilter/useChangeSearchState";
+import { useCampanhasQuery } from "old/search/useCampanhasQuery";
+import { useNextParams } from "old/search/useNextParams";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { SearchInput } from "typings";
 
 interface IProps {
-  gridRef: React.MutableRefObject<HTMLButtonElement | undefined>;
-  setLoading: () => void;
   onClose: () => void;
   drawerState: Partial<SearchInput>;
   setDrawerState: Dispatch<SetStateAction<Partial<SearchInput>>>;
@@ -30,8 +28,6 @@ export const SearchFilterDrawerAppBar: React.FC<IProps> = ({
   drawerState,
   setDrawerState,
   input,
-  setLoading,
-  gridRef,
 }) => {
   const sx = {
     height: 48,
@@ -47,9 +43,8 @@ export const SearchFilterDrawerAppBar: React.FC<IProps> = ({
       (q?.data?.findIndex((d) => d.attributes.slug === params.campanha) || 0) +
       1;
     if (campanhaIndex > 0) setValue(campanhaIndex + 2);
-    console.log(555, campanhaIndex);
-  }, [q?.data]);
-  const navigateNewSearch = useChangeSearchState(gridRef, setLoading);
+  }, [params.campanha, q?.data]);
+  const navigateNewSearch = useChangeSearchState();
   const sx1 = (theme: Theme) => ({
     color: theme.palette.grey.A400,
     "&.Mui-selected": {

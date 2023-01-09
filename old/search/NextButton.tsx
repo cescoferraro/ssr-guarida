@@ -6,7 +6,6 @@ import { SearchResponse } from "typings";
 
 interface IProps {
   query: UseInfiniteQueryResult<SearchResponse>;
-  containerRef: React.MutableRefObject<HTMLButtonElement | undefined>;
 }
 
 export function NextButton({ query }: IProps) {

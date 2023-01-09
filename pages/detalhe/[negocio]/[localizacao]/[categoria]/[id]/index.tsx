@@ -1,5 +1,4 @@
 import { GetServerSidePropsContext } from "next";
-import { useRouter } from "next/router";
 import { ImovelDetail } from "old/imovel/ImovelDetail";
 import { imovelDetailsQuery } from "old/imovel/useImovelDetailsQuery";
 import { Imovel } from "typings";

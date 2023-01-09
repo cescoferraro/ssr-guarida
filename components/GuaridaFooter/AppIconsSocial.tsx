@@ -5,6 +5,7 @@ import instagram from "common/assets/images/instagram.svg";
 import linkedin from "common/assets/images/linkedin.svg";
 import twitter from "common/assets/images/twitter.svg";
 import youtube from "common/assets/images/youtube.svg";
+import Image from "next/image";
 
 export const AppIconsSocial = () => {
   return (
@@ -19,7 +20,7 @@ export const AppIconsSocial = () => {
       ].map((item, index) => {
         return (
           <IconButton key={index} href={item.href}>
-            <img className={item.value} src={item.value} alt={item.value} />
+            <Image className={item.value} src={item.value} alt={item.value} />
           </IconButton>
         );
       })}

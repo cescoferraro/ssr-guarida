@@ -1,7 +1,6 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { GuaridaHttpClient } from "common/GuaridaHttpClient";
-import { getNegocioIdFromUrl } from "legacy/search/hooks/getNegocioIdFromUrl";
-import { useRouter } from "next/router";
+import { useGetNegocioIdFromUrl } from "old/search/hooks/useGetNegocioIdFromUrl";
 import { Categoria, SearchInput } from "typings";
 
 const capitalize = (str: string): string => {
@@ -9,12 +8,11 @@ const capitalize = (str: string): string => {
 };
 
 export function useGuaridaCategorias(
-  drawerState?: Partial<SearchInput>,
-  h?: string
+  drawerState?: Partial<SearchInput>
 ): UseQueryResult<Categoria[]> {
-  const negocio = useRouter().query.negocio as string | undefined;
+  const useGetNegocioIdFromUrl1 = useGetNegocioIdFromUrl();
   const params = new URLSearchParams({
-    tpo_negocio: String(drawerState?.negocio || getNegocioIdFromUrl(negocio)),
+    tpo_negocio: String(drawerState?.negocio || useGetNegocioIdFromUrl1),
     finalidade: capitalize(drawerState?.finalidade || ""),
   });
   return useQuery<unknown, Error, Categoria[]>({

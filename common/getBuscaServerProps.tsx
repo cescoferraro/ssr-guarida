@@ -4,20 +4,22 @@ import { GetServerSidePropsContext } from "next";
 import { searchInfiniteQuery } from "old/search/hooks/useSearchInfiniteQuery";
 import { Categoria, LocalizacoesBySlug, SearchResponse } from "typings";
 
-interface IResult {
-  categorias?: Categoria[];
-  initialLocal?: LocalizacoesBySlug;
-  initialResult?: SearchResponse;
+export interface IResult {
+  categories?: Categoria[];
+  local?: LocalizacoesBySlug;
+  response?: SearchResponse;
 }
 
 export async function getBuscaServerProps(
   context: GetServerSidePropsContext
 ): Promise<IResult> {
+  console.log("===========");
+  console.log(context.req.url);
   const startTime = performance.now();
   const localizacao = context.params?.localizacao as string | undefined;
   const categoria = context?.params?.categoria as string | undefined;
   const negocio = context?.params?.negocio as string | undefined;
-  const [categorias, initialLocal]: [Categoria[], LocalizacoesBySlug] =
+  const [categories, local]: [Categoria[], LocalizacoesBySlug] =
     await Promise.all([
       categoriasPorNegocio(categoria, negocio),
       currentLocalQuery(localizacao),
@@ -26,14 +28,19 @@ export async function getBuscaServerProps(
     negocio: negocio === "alugar" ? 1 : 2,
     order: "codigo-desc",
     finalidade: "Residencial",
-    [initialLocal?.tipo as string]: initialLocal.id,
+    [local?.tipo as string]: local.id,
   };
-  const initialResult = await searchInfiniteQuery(input, 1);
+  const response = await searchInfiniteQuery(input, 1);
   const endTime = performance.now();
   console.log(
     `Call to doSomething took ${Math.round(
       (endTime - startTime) / 1000
     )} seconds`
   );
-  return { initialResult, initialLocal, categorias };
+  console.log(response.imoveis?.length);
+  return {
+    response,
+    local,
+    categories,
+  };
 }

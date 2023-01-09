@@ -2,12 +2,13 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Box, Button, Typography } from "@mui/material";
 import { center } from "common/center";
 import { capitalize } from "lodash";
+import Image from "next/image";
 import {
   Lead,
   stripMaskFromValue,
 } from "old/imovel/ImovelBody/ImovelPaper/LeadForm/LeadFormComponent";
-import React, { Dispatch, SetStateAction } from "react";
 import { useNextParams } from "old/search/useNextParams";
+import React, { Dispatch, SetStateAction } from "react";
 import { Imovel } from "typings";
 
 export function goToWhats(imovel?: Imovel, negocio?: string) {
@@ -31,13 +32,13 @@ export function CorretorComponent({
   setOpen: Dispatch<SetStateAction<boolean>>;
   setSend2Whats: Dispatch<SetStateAction<boolean>>;
 }) {
-  const negocio = useNextParams().negocio;
+  const negocio = useNextParams().negocio as string;
   return (
     <>
       {imovel?.corretor && (
         <>
           <Box sx={{ ...center, pb: 1, pt: 2 }}>
-            <img
+            <Image
               style={{ width: 105, height: 105, borderRadius: 50 }}
               src={imovel?.corretor?.foto || ""}
               alt=""

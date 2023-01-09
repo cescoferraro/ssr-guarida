@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import { ParsedUrlQuery } from "querystring";
 
-export const useNextParams = (): ParsedUrlQuery => {
+export const useNextParams = (): Record<string, string> => {
   const router = useRouter();
-  return router.query;
+  return router.query as Record<string, string>;
 };

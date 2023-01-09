@@ -5,7 +5,6 @@ import { Imovel, SearchInput } from "typings";
 
 interface IProps {
   input: Partial<SearchInput>;
-  loading: boolean;
   imoveis: Imovel[];
 }
 

@@ -1,5 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+const nextConfig = withBundleAnalyzer({
   reactStrictMode: true,
   swcMinify: true,
   env: {
@@ -12,7 +17,7 @@ const nextConfig = {
     URL: "https://www.guarida.com.br",
     LOCAL_URL: "http://localhost:3000",
   },
-};
+});
 
 module.exports = {
   ...nextConfig,

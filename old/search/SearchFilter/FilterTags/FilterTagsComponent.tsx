@@ -10,13 +10,11 @@ import React from "react";
 import { SearchInput } from "typings";
 
 interface IProps {
-  setLoading: () => void;
   input: Partial<SearchInput>;
-  gridRef: React.MutableRefObject<HTMLButtonElement | undefined>;
 }
 
-export function FilterTagsComponent({ input, setLoading, gridRef }: IProps) {
-  const search = useChangeSearchState(gridRef, setLoading);
+export function FilterTagsComponent({ input }: IProps) {
+  const search = useChangeSearchState();
   const { data, isSuccess } = useGuaridaCategoriaQuery();
   const filterQuery = useCategoriaFilterQuery(input);
   const allTags = filterPosibleTags(isSuccess, filterQuery, input);

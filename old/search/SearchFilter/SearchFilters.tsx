@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
 import { UseInfiniteQueryResult } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
 import { FilterBreadcrums } from "old/search/SearchFilter/FilterBreadcrums/FilterBreadcrums";
-import { FilterDrawer } from "old/search/SearchFilter/FilterDrawer/FilterDrawer";
+
 import { FilterTags } from "old/search/SearchFilter/FilterTags/FilterTags";
 import { FilterTotal } from "old/search/SearchFilter/FilterTotal/FilterTotal";
 import React, { useState } from "react";
@@ -10,19 +11,17 @@ import { SearchInput, SearchResponse } from "typings";
 export interface IProps {
   input: Partial<SearchInput>;
   total?: number;
-  setLoading: () => void;
-  loading: boolean;
-  containerRef: React.MutableRefObject<HTMLButtonElement | undefined>;
   query: UseInfiniteQueryResult<SearchResponse>;
 }
 
+const FilterDrawer = dynamic(() => import("./FilterDrawer/FilterDrawer"), {
+  ssr: false,
+});
+
 export const SearchFilters: React.FC<IProps> = ({
   query,
-  setLoading,
   total = 0,
   input,
-  containerRef,
-  loading,
 }) => {
   const [open, setOpen] = useState(false);
   const [drawerState, setDrawerState] = useState<Partial<SearchInput>>(input);
@@ -41,28 +40,10 @@ export const SearchFilters: React.FC<IProps> = ({
         },
       }}
     >
-      <FilterBreadcrums
-        setLoading={setLoading}
-        containerRef={containerRef}
-        input={input}
-      />
-      <FilterTags
-        input={input}
-        setOpen={setOpen}
-        setLoading={setLoading}
-        gridRef={containerRef}
-      />
-      <FilterTotal
-        loading={loading}
-        query={query}
-        gridRef={containerRef}
-        setLoading={setLoading}
-        input={input}
-        total={total}
-      />
+      <FilterBreadcrums input={input} />
+      <FilterTags input={input} setOpen={setOpen} />
+      <FilterTotal query={query} input={input} total={total} />
       <FilterDrawer
-        gridRef={containerRef}
-        setLoading={setLoading}
         drawerState={drawerState}
         setDrawerState={setDrawerState}
         open={open}

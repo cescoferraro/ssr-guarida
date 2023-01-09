@@ -40,7 +40,8 @@ export function ImageAutoplay({
           <ButtonBase
             onClick={() => {
               if (a?.url_destino) {
-                navigate(a?.url_destino);
+                console.log(223);
+                navigate(a?.url_destino, undefined, { shallow: true });
               }
             }}
             key={`${a?.url}-${idx}`}

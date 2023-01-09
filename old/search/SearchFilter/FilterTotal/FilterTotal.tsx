@@ -9,21 +9,12 @@ import { useNextParams } from "old/search/useNextParams";
 import { Cidade, SearchInput, SearchResponse } from "typings";
 
 interface IProps {
-  setLoading: () => void;
   input: Partial<SearchInput>;
   total: number;
-  gridRef: React.MutableRefObject<HTMLButtonElement | undefined>;
   query: UseInfiniteQueryResult<SearchResponse>;
-  loading: boolean;
 }
 
-export const FilterTotal: React.FC<IProps> = ({
-  loading,
-  setLoading,
-  total,
-  input,
-  gridRef,
-}) => {
+export const FilterTotal: React.FC<IProps> = ({ total, input }) => {
   const find = useGuaridaLocal().data;
   const query = useGuaridaCategoriaQuery();
   const uf = (find as Cidade)?.uf;
@@ -43,7 +34,7 @@ export const FilterTotal: React.FC<IProps> = ({
           display: { xs: "none", sm: "none", md: "flex" },
         }}
       >
-        {loading ? (
+        {false ? (
           <Skeleton variant="text" height={29} width={200} />
         ) : (
           <Box>
@@ -55,11 +46,7 @@ export const FilterTotal: React.FC<IProps> = ({
         display="flex"
         sx={{ flexGrow: 1, display: "flex", justifyContent: "flex-end" }}
       >
-        <PropertyFilterFooterOrder
-          gridRef={gridRef}
-          input={input}
-          setLoading={setLoading}
-        />
+        <PropertyFilterFooterOrder input={input} />
       </Box>
     </Box>
   );

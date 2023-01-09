@@ -1,7 +1,7 @@
 import { Mail } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { sharableUrl } from "components/ImovelSocialShare/sharableUrl";
+import { useSharableUrl } from "components/ImovelSocialShare/useSharableUrl";
 import { SocialModalMode } from "components/ImovelSocialShare/SocialModalMode";
 import React, { Dispatch, SetStateAction } from "react";
 import { Imovel } from "typings";
@@ -12,7 +12,7 @@ export function SocialList({
   setMode: Dispatch<SetStateAction<SocialModalMode>>;
   imovel?: Imovel;
 }) {
-  const urlToShare = sharableUrl(imovel);
+  const urlToShare = useSharableUrl(imovel);
   return (
     <Box display="flex" flexDirection="column">
       <Typography sx={{ py: 1 }}>Compartilhar</Typography>

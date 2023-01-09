@@ -1,10 +1,8 @@
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
-import { GuaridaSvgLogo } from "components/GuaridaAppBar/GuaridaSvgLogo";
+import { Box, IconButton } from "@mui/material";
 import React from "react";
 
 export function GuaridaAppBarLogo(props: { onClick: () => void }) {
-  const isSmallScreen = useMediaQuery(useTheme().breakpoints.down("md"));
   return (
     <Box
       sx={{

@@ -9,20 +9,20 @@ import {
 } from "@mui/material";
 import { center } from "common/center";
 import { useRouter } from "next/router";
+import { useChangeSearchState } from "old/search/SearchFilter/useChangeSearchState";
 import { useCampanhasQuery } from "old/search/useCampanhasQuery";
 import React, { useState } from "react";
 import { CampanhaImage, FiltroCampanha, SearchInput } from "typings";
 import { useNextParams } from "./useNextParams";
 
 export function CampanhaFiltroDialog({
-  needsToSelectFilter,
   input,
-  search,
-}: {
-  search: ({ negocio, ...drawerState }: Partial<SearchInput>) => void;
-  needsToSelectFilter: boolean;
+}: // search,
+{
+  // search: ({ negocio, ...drawerState }: Partial<SearchInput>) => void;
   input: Partial<SearchInput>;
 }) {
+  const search = useChangeSearchState();
   const q = useCampanhasQuery();
   const navigate = useRouter().push;
   const params = useNextParams();
@@ -32,8 +32,9 @@ export function CampanhaFiltroDialog({
   const data = campanha?.attributes?.imagens?.find(
     (c: CampanhaImage) => c.tipo === "header_filtro"
   )?.["desktop"]?.data;
+  const p = useNextParams();
   return (
-    <Dialog open={needsToSelectFilter} sx={{ ...center }}>
+    <Dialog open={p.campanha !== "busca" && !p.localizacao} sx={{ ...center }}>
       <Paper sx={{ overflow: "hidden" }}>
         <Box
           sx={{

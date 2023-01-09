@@ -3,11 +3,12 @@ import React from "react";
 
 interface IProps {
   name: string;
-  onClick: () => void;
+  onClick?: () => void;
+  href?: string;
 }
 
-export const LocalBreadcrumb: React.FC<IProps> = ({ name, onClick }) => (
-  <Link underline="hover" color="inherit" onClick={onClick}>
+export const LocalBreadcrumb: React.FC<IProps> = ({ href, name, onClick }) => (
+  <Link underline="hover" color="inherit" href={href} onClick={onClick}>
     {name}
   </Link>
 );

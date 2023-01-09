@@ -34,6 +34,8 @@ export function GuaridaTextField({
   return (
     <Box>
       {format ? (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         <PatternFormat
           format={format}
           mask={mask}
